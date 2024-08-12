@@ -13,28 +13,67 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
+model User {
   id        Int      @id @default(autoincrement())
+  username  String   @unique
+  password  String
+  // role      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  title     String   @db.VarChar(255)
-  content   String?
-  published Boolean  @default(false)
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  Int
 }
 
-model Profile {
-  id     Int     @id @default(autoincrement())
-  bio    String?
-  user   User    @relation(fields: [userId], references: [id])
-  userId Int     @unique
+model Project {
+  id             Int            @id @default(autoincrement())
+  name           String
+  description    String?
+  link           String?
+  repoLink       String?
+  thumbnailImage String?
+  content        String?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  tags           ProjectTag[]
+  stacks         ProjectStack[]
 }
 
-model User {
-  id      Int      @id @default(autoincrement())
-  email   String   @unique
-  name    String?
-  posts   Post[]
-  profile Profile?
+model Skill {
+  id        Int      @id @default(autoincrement())
+  name      String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Tag {
+  id        Int          @id @default(autoincrement())
+  name      String
+  isActive  Boolean      @default(true)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  projects  ProjectTag[]
+}
+
+model Stack {
+  id        Int            @id @default(autoincrement())
+  name      String
+  isActive  Boolean        @default(true)
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  projects  ProjectStack[]
+}
+
+model ProjectTag {
+  id        Int     @id @default(autoincrement())
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId Int
+  tag       Tag     @relation(fields: [tagId], references: [id], onDelete: Cascade)
+  tagId     Int
+}
+
+model ProjectStack {
+  id        Int     @id @default(autoincrement())
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId Int
+  stack     Stack   @relation(fields: [stackId], references: [id], onDelete: Cascade)
+  stackId   Int
 }

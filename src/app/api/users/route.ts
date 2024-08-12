@@ -1,28 +1,26 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
-export const GET = async (request: NextApiRequest, res: NextApiResponse) => {
-  const resultData = await prisma.user.findMany();
-  return Response.json(resultData);
-};
-
-type PostRequest = {
-  email: string;
-  name: string;
-};
-export async function POST(request: Request) {
+export const GET = async (request: Request, res: Response) => {
   try {
-    const res: PostRequest = await request.json();
-    const resultData = await prisma.user.create({
-      data: {
-        email: res.email,
-        name: res.name,
+    const resultData = await prisma.user.findMany({
+      select: {
+        id: true,
+        username: true,
+        createdAt: true,
+        updatedAt: true,
       },
     });
-    return Response.json({ resultData });
+    return Response.json({
+      statusCode: 200,
+      message: 'Ok.',
+      result: resultData,
+    });
   } catch (error) {
     console.log(error);
-    return Response.json({ statusCode: 400, message: error }, { status: 400 });
+    return Response.json(
+      { statusCode: 500, message: 'Internal server error.' },
+      { status: 500 }
+    );
   }
-}
+};
