@@ -1,5 +1,9 @@
+'use client';
+import { useEffect } from 'react';
+
 export default function Home() {
-  return (
-    <>fg</>
-  );
+  useEffect(() => {
+    console.log('home');
+  }, []);
+  return <div className="container mx-auto">Home</div>;
 }
