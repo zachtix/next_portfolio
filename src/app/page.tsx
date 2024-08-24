@@ -1,9 +1,11 @@
 'use client';
-import { useEffect } from 'react';
+import Navbar from './components/Navbar';
 
 export default function Home() {
-  useEffect(() => {
-    console.log('home');
-  }, []);
-  return <div className="container mx-auto">Home</div>;
+  return (
+    <div className="h-screen">
+      <Navbar />
+      <div className="container mx-auto">Home</div>
+    </div>
+  );
 }

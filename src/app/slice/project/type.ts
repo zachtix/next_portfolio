@@ -1,4 +1,5 @@
 export interface ProjectsState {
+  project: {};
   projects: object[];
 }
 interface Tag {
@@ -10,6 +11,7 @@ interface Stack {
   name: string;
 }
 export interface Project {
+  id: string;
   name: string;
   description: string;
   link: string;

@@ -31,3 +31,30 @@
     text-wrap: balance;
   }
 }
+
+@layer components {
+  .badge {
+    @apply inline-flex items-center rounded-md px-2 py-1 text-xs font-medium bg-gray-50 text-gray-600 ring-1 ring-inset ring-gray-500/10;
+    &.frontend {
+      @apply bg-blue-50 text-blue-700 ring-blue-700/10;
+    }
+    &.backend {
+      @apply bg-pink-50 text-pink-400 ring-pink-400/10;
+    }
+    &.prisma {
+      @apply bg-[#0C3249] text-white ring-[#2a6d96];
+    }
+    &.typescript {
+      @apply bg-sky-50 text-sky-700 ring-sky-700/10;
+    }
+    &.javascript {
+      @apply bg-amber-50 text-amber-700 ring-amber-700/10;
+    }
+    &.react {
+      @apply bg-[#04172A] text-[#00D8FF] ring-[#2a6d96];
+    }
+    &.nextjs {
+      @apply bg-white text-black ring-[#48494D];
+    }
+  }
+}

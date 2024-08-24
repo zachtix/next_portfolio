@@ -2,9 +2,9 @@
 import type { Metadata } from 'next';
 import { Kanit } from 'next/font/google';
 import './globals.css';
-import Navbar from './components/Navbar';
 import { Provider } from 'react-redux';
 import store from './slice/index';
+import Navbar from './components/Navbar';
 
 const inter = Kanit({ subsets: ['latin'], weight: '400' });
 
@@ -18,11 +18,19 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // useEffect(() => {
+  //   document.querySelector('html')?.classList.add('dark');
+  // }, []);
   return (
     <Provider store={store}>
       <html lang="en">
-        <body className="bg-red-300">
+        {/* <body
+          className={`${inter.className} bg-[#222222] text-white max-h-screen overflow-hidden`}
+        >
           <Navbar />
+          {children}
+        </body> */}
+        <body className={`${inter.className} bg-[#222222] text-white`}>
           {children}
         </body>
       </html>
