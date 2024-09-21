@@ -24,13 +24,9 @@ export default function RootLayout({
   return (
     <Provider store={store}>
       <html lang="en">
-        {/* <body
-          className={`${inter.className} bg-[#222222] text-white max-h-screen overflow-hidden`}
+        <body
+          className={`${inter.className} bg-[#222222] text-white mb-12 md:mb-0 h-screen overflow-hidden`}
         >
-          <Navbar />
-          {children}
-        </body> */}
-        <body className={`${inter.className} bg-[#222222] text-white`}>
           {children}
         </body>
       </html>

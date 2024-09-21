@@ -6,71 +6,13 @@ import { RootState, AppDispatch } from '../slice';
 import type { Project } from '../slice/project/type';
 import { getProjects } from '../slice/actions';
 
-const mockData = [
-  {
-    id: 1,
-    name: 'Javascripts',
-    description:
-      'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae facilis corrupti eum beatae iusto recusandae labore provident necessitatibus illum, explicabo animi fugit esse alias laborum suscipit totam a! Magnam quia in vel cum molestias quas eum fugit deleniti aliquam, ad tempora quos et omnis autem non numquam voluptas facilis necessitatibus, natus itaque! Quibusdam numquam ratione recusandae est ipsam animi atque beatae laborum amet unde et asperiores, esse obcaecati ab, repellendus assumenda excepturi consequatur, earum praesentium! Non delectus ad odit blanditiis illum nobis eligendi sed debitis pariatur dignissimos iure ducimus neque incidunt, dolorum quam aliquid consectetur quisquam ratione fuga inventore tempore.',
-    link: '',
-    repoLink: '',
-    thumbnailImage:
-      'https://b2dmain-ruk.cdn.jelastic.net/wp-content/uploads/2024/07/code-no-low-blog-600x403.jpg',
-    content: '',
-    stacks: [
-      {
-        id: 5,
-        name: 'Next.js',
-      },
-      {
-        id: 4,
-        name: 'React',
-      },
-      {
-        id: 3,
-        name: 'Prisma',
-      },
-      {
-        id: 2,
-        name: 'Typescript',
-      },
-      {
-        id: 1,
-        name: 'Javascript',
-      },
-      {
-        id: 3,
-        name: 'Prisma',
-      },
-      {
-        id: 2,
-        name: 'Typescript',
-      },
-      {
-        id: 1,
-        name: 'Javascript',
-      },
-    ],
-    tags: [
-      {
-        id: 2,
-        name: 'Backend',
-      },
-      {
-        id: 1,
-        name: 'Frontend',
-      },
-    ],
-  },
-];
-const repeatedMockData = Array.from({ length: 10 }, () => mockData).flat();
-
 function Project() {
   const dispatch = useDispatch<AppDispatch>();
   const projects = useSelector(
     (state: RootState) => state.project.projects as Project[]
   );
   useEffect(() => {
+    document.title = 'Project';
     dispatch(getProjects());
   }, []);
   const badge = (tag: string) => {
@@ -94,8 +36,8 @@ function Project() {
     }
   };
   return (
-    <div className="container mx-auto mb-10 px-2 sm:px-0 grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
-      {repeatedMockData.map((item, indexProject) => (
+    <div className="container mx-auto mt-4 mb-20 px-2 sm:px-0 grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+      {projects.map((item, indexProject) => (
         <div
           key={indexProject}
           className="col-span-1 rounded-xl p-3 flex flex-col gap-2 bg-[#272829] hover:bg-[#2b2e33] transition duration-300"
@@ -133,6 +75,27 @@ function Project() {
           </div>
         </div>
       ))}
+      {projects.length < 1
+        ? Array.from({ length: 6 }).map((_, index) => (
+            <div className="col-span-1 rounded-xl p-3 flex flex-col gap-3 bg-[#272829] hover:bg-[#2b2e33] transition duration-300 animate-pulse">
+              <div className="flex justify-between items-center">
+                <div className="w-48 h-4 bg-slate-200 rounded-2xl" />
+                <div className="w-20 h-6 bg-slate-200 rounded-2xl" />
+              </div>
+              <div className="h-48 bg-slate-200 rounded-2xl" />
+              <div className="flex gap-2">
+                <div className="w-20 h-6 bg-slate-200 rounded-2xl" />
+                <div className="w-20 h-6 bg-slate-200 rounded-2xl" />
+              </div>
+              <div className="grid grid-cols-3 gap-2">
+                <div className="col-span-1 h-4 bg-slate-200 rounded-2xl" />
+                <div className="col-span-2 h-4 bg-slate-200 rounded-2xl" />
+                <div className="col-span-2 h-4 bg-slate-200 rounded-2xl" />
+                <div className="col-span-1 h-4 bg-slate-200 rounded-2xl" />
+              </div>
+            </div>
+          ))
+        : undefined}
     </div>
   );
 }

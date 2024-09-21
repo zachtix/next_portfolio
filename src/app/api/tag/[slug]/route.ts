@@ -23,18 +23,18 @@ type PostRequest = {
   name: string;
   isActive: boolean;
 };
-export async function PATCH(
-  request: Request,
-  { params }: { params: { slug: number } }
-) {
-  const slug = params.slug;
-  const { name, isActive }: PostRequest = await request.json();
-  const resultData = await prisma.tag.update({
-    where: { id: slug },
-    data: {
-      name,
-      isActive,
-    },
-  });
-  return Response.json(resultData);
-}
+// export async function PATCH(
+//   request: Request,
+//   { params }: { params: { slug: number } }
+// ) {
+//   const slug = params.slug;
+//   const { name, isActive }: PostRequest = await request.json();
+//   const resultData = await prisma.tag.update({
+//     where: { id: slug },
+//     data: {
+//       name,
+//       isActive,
+//     },
+//   });
+//   return Response.json(resultData);
+// }

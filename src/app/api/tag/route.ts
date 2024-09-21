@@ -11,18 +11,18 @@ type PostRequest = {
   name: string;
   isActive: boolean;
 };
-export async function POST(request: Request) {
-  try {
-    const { name, isActive }: PostRequest = await request.json();
-    const resultData = await prisma.tag.create({
-      data: {
-        name,
-        isActive,
-      },
-    });
-    return Response.json({ resultData });
-  } catch (error) {
-    console.log(error);
-    return Response.json({ statusCode: 400, message: error }, { status: 400 });
-  }
-}
+// export async function POST(request: Request) {
+//   try {
+//     const { name, isActive }: PostRequest = await request.json();
+//     const resultData = await prisma.tag.create({
+//       data: {
+//         name,
+//         isActive,
+//       },
+//     });
+//     return Response.json({ resultData });
+//   } catch (error) {
+//     console.log(error);
+//     return Response.json({ statusCode: 400, message: error }, { status: 400 });
+//   }
+// }
